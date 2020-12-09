@@ -1,0 +1,75 @@
+﻿@model RoverTrackingService.Models.input
+
+@{
+    ViewData["Title"] = "FinalPlateauState";
+    ViewBag.Title = "FinalPlateauState";
+}
+@using (Html.BeginForm("FinalPlateauState", "Rover", FormMethod.Post))
+{
+    <h1>FinalPlateauState</h1>
+
+    <h4>input</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="FinalPlateauState">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="inputStr" class="control-label"></label>
+
+
+<textarea asp-for="inputStr" class="form-control" cols="40" rows="5"></textarea>
+                    @*  <input asp-for="inputStr" class="form-control" />*@
+                    <span asp-validation-for="inputStr" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    @*<input type="submit" value="Submit" class="btn btn-primary" formaction="@Url.Action("ComputeState", "Rover")"/>*@
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+
+
+
+
+        </div>
+    </div>
+
+    if (ViewData["Success"] != null)
+    {
+        <h4>valid!</h4>
+        <div>@ViewBag.Plateau.upperRightCoordinates.x_coordinate</div>
+        <div> @ViewBag.Plateau.upperRightCoordinates.y_coordinate</div>
+
+
+        @*foreach (Rover rover in @ViewBag.Plateau.Rovers)
+
+        {
+
+            @rover.finalCoordinates.x_coordinate;
+            @rover.finalCoordinates.y_coordinate;
+            @rover.finalOrientation;
+            <br />
+
+        }*@
+
+
+
+        <div>@ViewBag.Plateau</div>
+
+
+    }
+    else
+    {
+        <h4>Not valid!</h4>
+    }
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
