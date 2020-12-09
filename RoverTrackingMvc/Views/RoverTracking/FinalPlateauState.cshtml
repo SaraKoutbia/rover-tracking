@@ -6,67 +6,103 @@
 }
 @using (Html.BeginForm("FinalPlateauState", "RoverTracking", FormMethod.Post))
 {
-    <h1>FinalPlateauState</h1>
+    <h4>Compute the rovers' final coordinates and orientation</h4>
 
-    <h4>input</h4>
     <hr />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
             <form asp-action="FinalPlateauState">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="inputStr" class="control-label"></label>
+                    @* <label asp-for="inputStr" class="control-label"></label>*@
+                    <label for="exampleFormControlTextarea1">Enter a valid input</label>
+                    <textarea asp-for="inputStr" class="form-control" rows="6"></textarea>
 
-
-<textarea asp-for="inputStr" class="form-control" cols="40" rows="5"></textarea>
-                    @*  <input asp-for="inputStr" class="form-control" />*@
                     <span asp-validation-for="inputStr" class="text-danger"></span>
                 </div>
 
-
                 <div class="form-group">
-                    @*<input type="submit" value="Submit" class="btn btn-primary" formaction="@Url.Action("ComputeState", "Rover")"/>*@
                     <input type="submit" value="Submit" class="btn btn-primary" />
                 </div>
             </form>
 
+            @if (ViewData["Success"] != null)
+            {
+                int i = 1;
+                <div class="card">
+                    <div class="card-header">
+                        Results
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            @foreach (var rover in @ViewBag.Plateau.Rovers)
+                            {
+                                <li class="list-group-item">
+                                    <span class="font-weight-bold">Rover@(i) </span>
+                                    => @(String.Format(" {0} {1} {2}", rover.finalCoordinates.x_coordinate, rover.finalCoordinates.y_coordinate, rover.finalOrientation))
+                                </li>
+                                i++;
+                            }
+                        </ul>
+                    </div>
+                </div>}
+            else
+            {
+                <h4>Not valid!</h4>
+            }
 
-
-
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
         </div>
-    </div>
-
-    if (ViewData["Success"] != null)
-    {
-        <h4>valid!</h4>
-        <div>@ViewBag.Plateau.upperRightCoordinates.x_coordinate</div>
-        <div> @ViewBag.Plateau.upperRightCoordinates.y_coordinate</div>
 
 
-        foreach (var rover in @ViewBag.Plateau.Rovers)
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Cheat sheet - Valid input example</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li>
+                            5 5
+                        </li>
+                        <li>
+                            1 2 N
+                        </li>
+                        <li>
+                            LMLMLMLMM
+                        </li>
+                        <li>
+                            3 3 E
+                        </li>
+                        <li>
+                            MMRMMRMRRM
+                        </li>
+                    </ul>
+                    <hr />
+                    <h4>Explanation</h4>
 
-        {
-
-            @rover.finalCoordinates.x_coordinate;
-            @rover.finalCoordinates.y_coordinate;
-            @rover.finalOrientation;
-            <br />
-
-        }
-
-
-
-        <div>@ViewBag.Plateau</div>
-
-
-    }
-    else
-    {
-        <h4>Not valid!</h4>
-    }
-
-    <div>
-        <a asp-action="Index">Back to List</a>
+                    <ul class="list-unstyled">
+                        <li>
+                            <span class=" text-primary font-weight-bold">5 5</span> are the  the upper-right coordinates of the plateau.
+                        </li>
+                        <li>
+                            <span class="text-primary font-weight-bold">1 2 N</span> is the first rover's position.
+                        </li>
+                        <li>
+                            <span class="text-primary font-weight-bold">LMLMLMLMM</span> is the fisrt rover's trajectory.
+                        </li>
+                        <li>
+                            <span class="text-primary font-weight-bold">3 3 E</span> is the first rover's position.
+                        </li>
+                        <li>
+                            <span class="text-primary font-weight-bold">MMRMMRMRRM</span> is the second rover's trajectory.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 }
 
