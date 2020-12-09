@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using RoverTrackingService.Models;
-//using RoverTrackingService.Repositories;
+using RoverTrackingService.Repositories;
 
 
 
@@ -24,9 +24,9 @@ namespace RoverTrackingMvc.Controllers
             {
                 try
                 {
-                    //var plateauRegistery = new PlateauRepository();
-                    //plateau = plateauRegistery.computeFinalState(userInput);
-                    //ViewBag.Plateau = plateau;
+                    var plateauRegistery = new PlateauRepository();
+                    plateau = plateauRegistery.computeFinalState(userInput);
+                    ViewBag.Plateau = plateau;
                     ViewData["Success"] = "Success";                    
                 }
                 catch (Exception ex)

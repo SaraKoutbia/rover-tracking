@@ -4,7 +4,7 @@
     ViewData["Title"] = "FinalPlateauState";
     ViewBag.Title = "FinalPlateauState";
 }
-@using (Html.BeginForm("FinalPlateauState", "Rover", FormMethod.Post))
+@using (Html.BeginForm("FinalPlateauState", "RoverTracking", FormMethod.Post))
 {
     <h1>FinalPlateauState</h1>
 
@@ -43,7 +43,7 @@
         <div> @ViewBag.Plateau.upperRightCoordinates.y_coordinate</div>
 
 
-        @*foreach (Rover rover in @ViewBag.Plateau.Rovers)
+        foreach (var rover in @ViewBag.Plateau.Rovers)
 
         {
 
@@ -52,7 +52,7 @@
             @rover.finalOrientation;
             <br />
 
-        }*@
+        }
 
 
 
