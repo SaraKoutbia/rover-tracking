@@ -2,7 +2,7 @@
 
 namespace RoverTrackingService.Repositories
 {
-    interface IPlateauRepository
+    public interface IPlateauRepository
     {
         abstract void parseInput(input input);
         public Plateau computeFinalState(input input);

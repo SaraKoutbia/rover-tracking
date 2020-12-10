@@ -8,6 +8,13 @@ namespace RoverTrackingMvc.Controllers
 {
     public class RoverTrackingController : Controller
     {
+        private readonly IPlateauRepository _plateauRepository;
+
+        public RoverTrackingController(IPlateauRepository plateauRepository)
+        {
+            _plateauRepository = plateauRepository;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -19,8 +26,7 @@ namespace RoverTrackingMvc.Controllers
             {
                 try
                 {
-                    var plateauRegistery = new PlateauRepository();
-                    var plateau = plateauRegistery.computeFinalState(userInput);
+                    var plateau = _plateauRepository.computeFinalState(userInput);
                     ViewBag.Plateau = plateau;
                     ViewData["Success"] = "Success";
                 }
