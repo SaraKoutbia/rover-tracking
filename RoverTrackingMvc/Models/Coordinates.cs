@@ -1,4 +1,4 @@
-namespace RoverTrackingService.Models
+namespace RoverTrackingMvc.Models
 {
     public class Coordinates
     {

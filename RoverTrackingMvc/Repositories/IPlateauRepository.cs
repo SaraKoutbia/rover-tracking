@@ -1,10 +1,10 @@
-﻿using RoverTrackingService.Models;
+﻿using RoverTrackingMvc.Models;
 
-namespace RoverTrackingService.Repositories
+namespace RoverTrackingMvc.Repositories
 {
     public interface IPlateauRepository
     {
         abstract void ParseInput(Input input);
-        public Plateau ComputeFinalState(Input input);
+        public IPlateau ComputeFinalState(Input input);
     }
 }

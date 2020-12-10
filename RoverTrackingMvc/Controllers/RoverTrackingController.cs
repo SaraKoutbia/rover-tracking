@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using RoverTrackingService.Models;
-using RoverTrackingService.Repositories;
+using RoverTrackingMvc.Models;
+using RoverTrackingMvc.Repositories;
 
 
 namespace RoverTrackingMvc.Controllers

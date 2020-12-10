@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using RoverTrackingService.Models;
+using RoverTrackingMvc.Models;
 
-namespace RoverTrackingService.Repositories
+namespace RoverTrackingMvc.Repositories
 {
     public class PlateauRepository : IPlateauRepository
     {
-        private Plateau plateau { get; set; } = new Plateau();
 
-        private List<Tuple<Orientation, int>> dic = new List<Tuple<Orientation, int>>();
+        private readonly IPlateau _rectangularPlateau;
 
-        public Plateau ComputeFinalState(Input input)
+        public PlateauRepository(IPlateau plateau)
+        {
+            _rectangularPlateau = plateau;
+        }
+
+
+        public IPlateau ComputeFinalState(Input input)
         {
             ParseInput(input);
-            return this.plateau;
+            return this._rectangularPlateau;
         }
 
         public void ParseInput(Input value)
@@ -27,13 +31,13 @@ namespace RoverTrackingService.Repositories
 
             var firstLineStrs = inputLines.First().Where(x => x != ' ');// .Split("\\s+").Select(str => str.Trim());
 
-            this.plateau.upperRightCoordinates = new Coordinates(int.Parse(firstLineStrs.ElementAt(0).ToString()),
+            this._rectangularPlateau.UpperRightCoordinates = new Coordinates(int.Parse(firstLineStrs.ElementAt(0).ToString()),
              int.Parse(firstLineStrs.ElementAt(1).ToString()));
-            var rovers = this.plateau.Rovers;
+            var rovers = this._rectangularPlateau.Rovers;
 
             for (int i = 1; i < inputLines.Count(); i = i + 2)
             {
-                dic = new List<Tuple<Orientation, int>>();
+                var dic = new List<Tuple<Orientation, int>>();
                 var roverInitialStateStr = inputLines.ElementAt(i).Where(x => x != ' ');
 
                 var initialOrientation = (Orientation)Enum.Parse(typeof(Orientation), roverInitialStateStr.ElementAt(2).ToString(), true);
@@ -95,7 +99,8 @@ namespace RoverTrackingService.Repositories
 
                     Trajectory = inputLines.ElementAt(i + 1).Trim(),
                     FinalOrientation = dic.Last().Item1,
-                    FinalCoordinates = new Coordinates(x_coo, y_coo)
+                    FinalCoordinates = new Coordinates(x_coo, y_coo),
+                    TrajectoryBreakdown = dic
                 });
             }
         }

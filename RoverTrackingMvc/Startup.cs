@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RoverTrackingService.Repositories;
+using RoverTrackingMvc.Repositories;
+using RoverTrackingMvc.Models;
 
 namespace RoverTrackingMvc
 {
@@ -25,6 +26,7 @@ namespace RoverTrackingMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IPlateauRepository, PlateauRepository>();
+            services.AddTransient<IPlateau, RectangularPlateau>();
             services.AddControllersWithViews();
         }
 

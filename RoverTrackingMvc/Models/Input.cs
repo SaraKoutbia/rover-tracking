@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using RoverTrackingService.CustomAttributes;
-namespace RoverTrackingService.Models
+using RoverTrackingMvc.CustomAttributes;
+namespace RoverTrackingMvc.Models
 {
     public class Input
     {

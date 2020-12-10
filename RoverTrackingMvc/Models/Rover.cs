@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
 
 
-namespace RoverTrackingService.Models
+namespace RoverTrackingMvc.Models
 {
 
     public enum Orientation
@@ -19,7 +20,7 @@ namespace RoverTrackingService.Models
         public Coordinates FinalCoordinates { get; set; } = new Coordinates(0, 0);
         public Orientation FinalOrientation { get; set; }
         public string Trajectory { get; set; }
-        public Dictionary<Orientation, int> TrajectoryBreakdown { get; set; }
+        public List<Tuple<Orientation, int>> TrajectoryBreakdown { get; set; }= new List<Tuple<Orientation, int>>();
 
     }
 }
