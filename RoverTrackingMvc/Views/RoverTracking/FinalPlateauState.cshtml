@@ -1,4 +1,4 @@
-﻿@model RoverTrackingService.Models.input
+﻿@model RoverTrackingService.Models.Input
 
 @{
     ViewData["Title"] = "FinalPlateauState";
@@ -13,9 +13,9 @@
             <form asp-action="FinalPlateauState">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <textarea asp-for="inputStr" class="form-control" rows="6"></textarea>
+                    <textarea asp-for="InputStr" class="form-control" rows="6"></textarea>
 
-                    <span asp-validation-for="inputStr" class="text-danger"></span>
+                    <span asp-validation-for="InputStr" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
@@ -36,7 +36,7 @@
                             {
                                 <li class="list-group-item">
                                     <span class="font-weight-bold">Rover@(i) </span>
-                                    => @(String.Format(" {0} {1} {2}", rover.finalCoordinates.x_coordinate, rover.finalCoordinates.y_coordinate, rover.finalOrientation))
+                                    => @(String.Format(" {0} {1} {2}", rover.FinalCoordinates.Y_coordinate, rover.FinalCoordinates.Y_coordinate, rover.FinalOrientation))
                                 </li>
                                 i++;
                             }

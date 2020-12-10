@@ -2,11 +2,11 @@ using System.ComponentModel.DataAnnotations;
 using RoverTrackingService.CustomAttributes;
 namespace RoverTrackingService.Models
 {
-    public class input
+    public class Input
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage ="* The input is required.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "* The input is required.")]
         [ValidInputFormatAttribute]
-        public string inputStr { get; set; }
+        public string InputStr { get; set; }
 
     }
 }

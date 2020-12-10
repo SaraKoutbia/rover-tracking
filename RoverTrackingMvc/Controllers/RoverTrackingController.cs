@@ -20,13 +20,13 @@ namespace RoverTrackingMvc.Controllers
             return View();
         }
 
-        public ActionResult FinalPlateauState(input userInput)
+        public ActionResult FinalPlateauState(Input userInput)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var plateau = _plateauRepository.computeFinalState(userInput);
+                    var plateau = _plateauRepository.ComputeFinalState(userInput);
                     ViewBag.Plateau = plateau;
                     ViewData["Success"] = "Success";
                 }

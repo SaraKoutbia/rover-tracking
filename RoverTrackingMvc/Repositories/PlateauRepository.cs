@@ -13,15 +13,15 @@ namespace RoverTrackingService.Repositories
 
         private List<Tuple<Orientation, int>> dic = new List<Tuple<Orientation, int>>();
 
-        public Plateau computeFinalState(input input)
+        public Plateau ComputeFinalState(Input input)
         {
-            parseInput(input);
+            ParseInput(input);
             return this.plateau;
         }
 
-        public void parseInput(input value)
+        public void ParseInput(Input value)
         {
-            var strValue = value.inputStr;
+            var strValue = value.InputStr;
             var inputLines = strValue.Split(new[] { Environment.NewLine },
                                            StringSplitOptions.None).Select(l => l.Trim().ToUpper()).Where(l => l != "");
 
@@ -42,8 +42,8 @@ namespace RoverTrackingService.Repositories
                 var initialCoordinates = new Coordinates(int.Parse(roverInitialStateStr.ElementAt(0).ToString()),
                    int.Parse(roverInitialStateStr.ElementAt(1).ToString()));
 
-                var x_coo = initialCoordinates.x_coordinate;
-                var y_coo = initialCoordinates.y_coordinate;
+                var x_coo = initialCoordinates.X_coordinate;
+                var y_coo = initialCoordinates.Y_coordinate;
 
                 string pattern = "([LR])";
                 string[] substrings = Regex.Split(trajectory, pattern);
@@ -88,14 +88,14 @@ namespace RoverTrackingService.Repositories
 
                 rovers.Add(new Rover
                 {
-                    initialCoordinates = new Coordinates(int.Parse(roverInitialStateStr.ElementAt(0).ToString()),
+                    InitialCoordinates = new Coordinates(int.Parse(roverInitialStateStr.ElementAt(0).ToString()),
                                   int.Parse(roverInitialStateStr.ElementAt(0).ToString())),
 
-                    initialOrientation = (Orientation)Enum.Parse(typeof(Orientation), roverInitialStateStr.ElementAt(2).ToString(), true),
+                    InitialOrientation = (Orientation)Enum.Parse(typeof(Orientation), roverInitialStateStr.ElementAt(2).ToString(), true),
 
-                    trajectory = inputLines.ElementAt(i + 1).Trim(),
-                    finalOrientation = dic.Last().Item1,
-                    finalCoordinates = new Coordinates(x_coo, y_coo)
+                    Trajectory = inputLines.ElementAt(i + 1).Trim(),
+                    FinalOrientation = dic.Last().Item1,
+                    FinalCoordinates = new Coordinates(x_coo, y_coo)
                 });
             }
         }

@@ -2,13 +2,13 @@ namespace RoverTrackingService.Models
 {
     public class Coordinates
     {
-        public int x_coordinate { get; set; }
-        public int y_coordinate { get; set; }
+        public int X_coordinate { get; set; }
+        public int Y_coordinate { get; set; }
 
         public Coordinates(int x_coordinate, int y_coordinate)
         {
-            this.x_coordinate = x_coordinate;
-            this.y_coordinate = y_coordinate;
+            this.X_coordinate = x_coordinate;
+            this.Y_coordinate = y_coordinate;
         }
     }
 }

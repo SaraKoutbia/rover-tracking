@@ -4,7 +4,7 @@ namespace RoverTrackingService.Models
 {
     public class Plateau
     {
-        Coordinates lowerLeftCoordinates { get; } = new Coordinates(0, 0);
+        Coordinates LowerLeftCoordinates { get; } = new Coordinates(0, 0);
 
         public Coordinates upperRightCoordinates { get; set; } = new Coordinates(0, 0);
 

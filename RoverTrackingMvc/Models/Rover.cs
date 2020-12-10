@@ -14,12 +14,12 @@ namespace RoverTrackingService.Models
 
     public class Rover
     {
-        public Coordinates initialCoordinates { get; set; }
-        public Orientation initialOrientation { get; set; }
-        public Coordinates finalCoordinates { get; set; } = new Coordinates(0, 0);
-        public Orientation finalOrientation { get; set; }
-        public string trajectory { get; set; }
-        public Dictionary<Orientation, int> dic { get; set; }
+        public Coordinates InitialCoordinates { get; set; }
+        public Orientation InitialOrientation { get; set; }
+        public Coordinates FinalCoordinates { get; set; } = new Coordinates(0, 0);
+        public Orientation FinalOrientation { get; set; }
+        public string Trajectory { get; set; }
+        public Dictionary<Orientation, int> TrajectoryBreakdown { get; set; }
 
     }
 }
