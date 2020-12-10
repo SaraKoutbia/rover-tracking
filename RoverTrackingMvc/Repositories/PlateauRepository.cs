@@ -23,28 +23,27 @@ namespace RoverTrackingMvc.Repositories
             return this._rectangularPlateau;
         }
 
-        public void ParseInput(Input value)
+        public void ParseInput(Input input)
         {
-            var strValue = value.InputStr;
-            var inputLines = strValue.Split(new[] { Environment.NewLine },
+            var inputStr = input.InputStr;
+            var inputLines = inputStr.Split(new[] { Environment.NewLine },
                                            StringSplitOptions.None).Select(l => l.Trim().ToUpper()).Where(l => l != "");
 
-            var firstLineStrs = inputLines.First().Where(x => x != ' ');// .Split("\\s+").Select(str => str.Trim());
+            var firstLineChars = inputLines.First().Where(x => x != ' ');
 
-            this._rectangularPlateau.UpperRightCoordinates = new Coordinates(int.Parse(firstLineStrs.ElementAt(0).ToString()),
-             int.Parse(firstLineStrs.ElementAt(1).ToString()));
-            var rovers = this._rectangularPlateau.Rovers;
+            this._rectangularPlateau.UpperRightCoordinates = new Coordinates(int.Parse(firstLineChars.ElementAt(0).ToString()),
+             int.Parse(firstLineChars.ElementAt(1).ToString()));
 
             for (int i = 1; i < inputLines.Count(); i = i + 2)
             {
-                var dic = new List<Tuple<Orientation, int>>();
-                var roverInitialStateStr = inputLines.ElementAt(i).Where(x => x != ' ');
+                var TrajectoryBreakdownList = new List<Tuple<Orientation, int>>();
+                var roverInitialStateChars = inputLines.ElementAt(i).Where(x => x != ' ');
 
-                var initialOrientation = (Orientation)Enum.Parse(typeof(Orientation), roverInitialStateStr.ElementAt(2).ToString(), true);
+                var initialOrientation = (Orientation)Enum.Parse(typeof(Orientation), roverInitialStateChars.ElementAt(2).ToString(), true);
                 var trajectory = inputLines.ElementAt(i + 1).Trim();
 
-                var initialCoordinates = new Coordinates(int.Parse(roverInitialStateStr.ElementAt(0).ToString()),
-                   int.Parse(roverInitialStateStr.ElementAt(1).ToString()));
+                var initialCoordinates = new Coordinates(int.Parse(roverInitialStateChars.ElementAt(0).ToString()),
+                   int.Parse(roverInitialStateChars.ElementAt(1).ToString()));
 
                 var x_coo = initialCoordinates.X_coordinate;
                 var y_coo = initialCoordinates.Y_coordinate;
@@ -52,23 +51,23 @@ namespace RoverTrackingMvc.Repositories
                 string pattern = "([LR])";
                 string[] substrings = Regex.Split(trajectory, pattern);
 
-                dic.Add(new Tuple<Orientation, int>(initialOrientation, substrings[0].Length));
+                TrajectoryBreakdownList.Add(new Tuple<Orientation, int>(initialOrientation, substrings[0].Length));
                 for (int k = 1; k < substrings.Length; k++)
                 {
                     if ((substrings.ElementAt(k) == "L") || (substrings.ElementAt(k) == "R"))
                     {
-                        var lastOrientation = dic.Last().Item1;
+                        var lastOrientation = TrajectoryBreakdownList.Last().Item1;
 
                         var orientationAtK = (substrings.ElementAt(k) == "L") ? (Orientation)((((int)lastOrientation - 1) + 4) % 4) :
                             (Orientation)(((int)lastOrientation + 1) % 4);
                         var moveAtK = (k + 1) < (substrings.Length) ? substrings.ElementAt(k + 1).Length : 0;
 
-                        dic.Add(new Tuple<Orientation, int>(orientationAtK, moveAtK));
+                        TrajectoryBreakdownList.Add(new Tuple<Orientation, int>(orientationAtK, moveAtK));
 
                     }
                 }
 
-                foreach (var entry in dic)
+                foreach (var entry in TrajectoryBreakdownList)
                 {
                     switch (entry.Item1)
                     {
@@ -90,17 +89,17 @@ namespace RoverTrackingMvc.Repositories
                     }
                 }
 
-                rovers.Add(new Rover
+                this._rectangularPlateau.Rovers.Add(new Rover
                 {
-                    InitialCoordinates = new Coordinates(int.Parse(roverInitialStateStr.ElementAt(0).ToString()),
-                                  int.Parse(roverInitialStateStr.ElementAt(0).ToString())),
+                    InitialCoordinates = new Coordinates(int.Parse(roverInitialStateChars.ElementAt(0).ToString()),
+                                  int.Parse(roverInitialStateChars.ElementAt(0).ToString())),
 
-                    InitialOrientation = (Orientation)Enum.Parse(typeof(Orientation), roverInitialStateStr.ElementAt(2).ToString(), true),
+                    InitialOrientation = (Orientation)Enum.Parse(typeof(Orientation), roverInitialStateChars.ElementAt(2).ToString(), true),
 
                     Trajectory = inputLines.ElementAt(i + 1).Trim(),
-                    FinalOrientation = dic.Last().Item1,
+                    FinalOrientation = TrajectoryBreakdownList.Last().Item1,
                     FinalCoordinates = new Coordinates(x_coo, y_coo),
-                    TrajectoryBreakdown = dic
+                    TrajectoryBreakdown = TrajectoryBreakdownList
                 });
             }
         }

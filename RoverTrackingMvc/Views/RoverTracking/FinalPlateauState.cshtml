@@ -34,9 +34,31 @@
                         <ul class="list-unstyled">
                             @foreach (var rover in @ViewBag.Plateau.Rovers)
                             {
+
                                 <li class="list-group-item">
                                     <span class="font-weight-bold">Rover@(i) </span>
                                     => @(String.Format(" {0} {1} {2}", rover.FinalCoordinates.Y_coordinate, rover.FinalCoordinates.Y_coordinate, rover.FinalOrientation))
+
+
+                                    <a onclick=" $('#trajectoryBreakdown@(i)').toggle()" role="button" href="#" class="btn btn-link">   details...</a>
+
+                                    <table id="trajectoryBreakdown@(i)" style="display:none" class="table table-striped text-center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    Orientation
+                                                </th>
+                                                <th scope="col">Movements in this direction</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var step in rover.TrajectoryBreakdown)
+                                            {
+                                                <tr><td>@step.Item1</td> <td>@(step.Item2) </td></tr>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </li>
                                 i++;
                             }
