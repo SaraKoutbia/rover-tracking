@@ -4,7 +4,6 @@ using RoverTrackingService.Models;
 using RoverTrackingService.Repositories;
 
 
-
 namespace RoverTrackingMvc.Controllers
 {
     public class RoverTrackingController : Controller
@@ -16,18 +15,14 @@ namespace RoverTrackingMvc.Controllers
 
         public ActionResult FinalPlateauState(input userInput)
         {
-            var s = userInput.inputStr;
-            var plateau = new Plateau();
-
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     var plateauRegistery = new PlateauRepository();
-                    plateau = plateauRegistery.computeFinalState(userInput);
+                    var plateau = plateauRegistery.computeFinalState(userInput);
                     ViewBag.Plateau = plateau;
-                    ViewData["Success"] = "Success";                    
+                    ViewData["Success"] = "Success";
                 }
                 catch (Exception ex)
                 {
