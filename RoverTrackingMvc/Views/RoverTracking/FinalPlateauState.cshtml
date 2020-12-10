@@ -6,17 +6,13 @@
 }
 @using (Html.BeginForm("FinalPlateauState", "RoverTracking", FormMethod.Post))
 {
-    @*<h4>Compute the rovers' final position</h4>*@
 
-    @*<hr />*@
     <h6 class="mt-5">Enter a valid input</h6>
     <div class="row">
         <div class="col-md-8 mt-2">
             <form asp-action="FinalPlateauState">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    @* <label asp-for="inputStr" class="control-label"></label>*@
-                   @* <label for="exampleFormControlTextarea1">Enter a valid input</label>*@
                     <textarea asp-for="inputStr" class="form-control" rows="6"></textarea>
 
                     <span asp-validation-for="inputStr" class="text-danger"></span>
@@ -49,14 +45,15 @@
                 </div>}
             else
             {
-                <h4>Not valid!</h4>
+                @*<div class="alert alert-danger" role="alert">
+                        The input you entered is not valid. Please correct the errors in order to compute the rovers final position.
+                    </div>*@
             }
 
-            <div>
-                <a asp-action="Index">Back to List</a>
-            </div>
+            @*<div>
+                    <a asp-action="Index">Back to List</a>
+                </div>*@
         </div>
-
 
         <div class="col-md-4 mt-2">
             <div class="card">
