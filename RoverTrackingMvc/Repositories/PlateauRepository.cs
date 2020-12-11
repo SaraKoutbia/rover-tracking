@@ -72,19 +72,19 @@ namespace RoverTrackingMvc.Repositories
                     switch (entry.Item1)
                     {
                         case Orientation.N:
-                            y_coo = y_coo + entry.Item2;
+                            y_coo = Math.Min( y_coo + entry.Item2, _rectangularPlateau.UpperRightCoordinates.Y_coordinate);
                             break;
 
                         case Orientation.E:
-                            x_coo = x_coo + entry.Item2;
+                            x_coo = Math.Min(x_coo + entry.Item2, _rectangularPlateau.UpperRightCoordinates.X_coordinate);
                             break;
 
                         case Orientation.S:
-                            y_coo = y_coo - entry.Item2;
+                            y_coo = Math.Max(y_coo - entry.Item2, _rectangularPlateau.LowerLeftCoordinates.Y_coordinate);
                             break;
 
                         case Orientation.W:
-                            x_coo = x_coo - entry.Item2;
+                            x_coo = Math.Max(x_coo - entry.Item2, _rectangularPlateau.LowerLeftCoordinates.X_coordinate);
                             break;
                     }
                 }
