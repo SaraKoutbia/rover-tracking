@@ -72,7 +72,7 @@ namespace RoverTrackingMvc.Repositories
                     switch (entry.Item1)
                     {
                         case Orientation.N:
-                            y_coo = Math.Min( y_coo + entry.Item2, _rectangularPlateau.UpperRightCoordinates.Y_coordinate);
+                            y_coo = Math.Min(y_coo + entry.Item2, _rectangularPlateau.UpperRightCoordinates.Y_coordinate);
                             break;
 
                         case Orientation.E:
