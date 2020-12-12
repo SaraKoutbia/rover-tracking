@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RoverTrackingMvc.Models;
 
 namespace RoverTrackingMvc.Controllers
 {
-    public class HomeController : Controller
+    public class DocsController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<DocsController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public DocsController(ILogger<DocsController> logger)
         {
             _logger = logger;
         }
