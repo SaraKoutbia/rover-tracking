@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
-using RoverTrackingMvc.Models;
 
 namespace RoverTrackingMvc.CustomAttributes
 {
@@ -21,8 +20,7 @@ namespace RoverTrackingMvc.CustomAttributes
                                            StringSplitOptions.None).Select(l => l.Trim().ToUpper()).Where(l => l != "");
 
             //validate the first line 
-            //var firstLineChars = inputLines.First().Where(x => x != ' ');
-            var firstLineStrings = inputLines.First().Split().Where(str => str != "");// (.Where(x => x != ' ');
+            var firstLineStrings = inputLines.First().Split().Where(str => str != "");
             if (firstLineStrings.Count() != 2
                 || !int.TryParse(firstLineStrings.ElementAt(0).ToString(), out int xcoordinate)
                 || !int.TryParse(firstLineStrings.ElementAt(1).ToString(), out int ycoordinate)
@@ -34,7 +32,6 @@ namespace RoverTrackingMvc.CustomAttributes
             //validate the rover's initial position: check it is two integers followed by the orientation 
             for (int i = 1; i < inputLines.Count(); i += 2)
             {
-                //var roverInitialStateChars = inputLines.ElementAt(i).Where(x => x != ' ');
                 var roverInitialStateStrings = inputLines.ElementAt(i).Split().Where(str => str != "");
                 if ((roverInitialStateStrings.Count() != 3) ||
                         !int.TryParse(roverInitialStateStrings.ElementAt(0).ToString(), out int rover_x_coordinate) ||
@@ -58,10 +55,6 @@ namespace RoverTrackingMvc.CustomAttributes
                     return new ValidationResult(ErrorMessage = String.Format(@"The rover's must be within the plateau delimitted by:                                              
                                    ({0},{0}), ({1},{0}), ({0},{2}),({1},{2}) )", 0, PlateauUpperLeft_Xcoordinate, PlateauUpperLeft_Ycoordinate));
                 }
-
-
-
-
 
                 //validate the rover's trajectory is valid: It should only contain the following values 'M', 'L', 'R'
                 var expectedVals = new List<char> { 'M', 'L', 'R' };
