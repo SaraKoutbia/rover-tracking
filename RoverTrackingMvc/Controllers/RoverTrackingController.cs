@@ -28,12 +28,15 @@ namespace RoverTrackingMvc.Controllers
                 {
                     var plateau = _plateauRepository.ComputeFinalState(userInput);
                     ViewBag.Plateau = plateau;
-                    ViewData["Success"] = "Success";
+                    ViewData["Status"] = "Success";
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("Server side error occurred", ex.Message.ToString());
                 }
+            }
+            else {
+                ViewData["Status"] = "ModelError";
             }
             return View(userInput);
         }

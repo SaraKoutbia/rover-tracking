@@ -4,10 +4,11 @@ using FluentAssertions;
 using RoverTrackingMvc.Models;
 using RoverTrackingMvc.Repositories;
 
-namespace RoverTracking.Tests
+namespace RoverTracking.Tests.Repositories
 {
     public class InputAndExpectedOutput
     {
+        //valid inputs 
         public static IEnumerable<object[]> Data =>
                   new List<object[]>
             {
