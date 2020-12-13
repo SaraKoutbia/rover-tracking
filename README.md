@@ -3,7 +3,7 @@ An ASP.NET MVC application that, given the initial state and trajectory of the r
 
 ## Getting Started
 
-###1st option - Cloning the repo 
+### 1st option - Cloning the repo 
 From rover-tracking
 ```
 cd .\RoverTrackingMvc\ 
@@ -11,7 +11,7 @@ dotnet run
 ```
 Open "https://localhost:5001/" in a browser
 
-###2nd option - Pulling the docker image and running a container 
+### 2nd option - Pulling the docker image and running a container 
 Follow the instructions under [this page](https://github.com/SaraKoutbia/rover-tracking/packages/537675 ) 
 ```
 $ docker pull docker.pkg.github.com/sarakoutbia/rover-tracking/rovertrackingmvc:1.0.0
