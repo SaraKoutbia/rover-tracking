@@ -15,6 +15,7 @@ namespace RoverTracking.Tests.Controllers
             var roverTrackingController = new RoverTrackingController(new Mock<IPlateauRepository>().Object);
 
             roverTrackingController.ModelState.AddModelError("key", "error message");
+
             var actionResult = roverTrackingController.FinalPlateauState(new Input());
 
             Assert.IsType<Microsoft.AspNetCore.Mvc.ViewResult>(actionResult);

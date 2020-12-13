@@ -35,7 +35,8 @@ namespace RoverTrackingMvc.Controllers
                     ModelState.AddModelError("Server side error occurred", ex.Message.ToString());
                 }
             }
-            else {
+            else
+            {
                 ViewData["Status"] = "ModelError";
             }
             return View(userInput);
