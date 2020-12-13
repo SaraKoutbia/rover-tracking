@@ -23,13 +23,13 @@
     </ul>
     <h4>Objective and scope</h4>
     <p>
-        Determine the rovers final position on the plateau based on their initial position and trajectory.
+        Determine the rovers' final position on the plateau based on their initial position and trajectory.
         The plateau's boundaries are also considered in the calculations because the rovers are constrained to stay inside the plateau.
     </p>
     <h4>Assumptions</h4>
     <ul>
         <li>
-            Only one request can be made  at a time. In other words, each request specifies a single  plateau and the rover's initial positions that belong to it.
+            Only one request can be made  at a time. In other words, each request specifies a single  plateau and the rovers' initial positions that belong to it.
         </li>
         <li>
             The rovers must remain inside the plateau and any instructions requesting the rovers  to move beyond the plateau's boundaries will be ignored.
@@ -40,8 +40,8 @@
     <p>
         The default page displays a textbox where the user is expected to insert a formatted input string (see 1, figure A).
         Details about the expected format are provided on the side  (see 2, figure A).
-        The user input undergoes validation first, either validation passes and the final positions of the rovers are computed (see 3, figure A),
-        or validation fails, in which case, a validation error message is displayed, to inform the user why their input is rejected.
+        The user input undergoes validation first. In case validation succeeds, the final positions of the rovers are computed and returned under Results. (see 3, figure A),
+        If validation fails, a validation error message is displayed, to inform the user why their input is rejected.
         The breakdown of the rover's trajectory can be viewed by clicking the "details" anchor (see 4, figure A).
     </p>
     <div class="col-md-6 m-3">
@@ -70,7 +70,7 @@
 
     <h4>User input validations</h4>
 
-    <ul>
+    <ul class="mt-3 mb-4">
         <li>
             The user input cannot be null or empty.
         </li>
@@ -89,10 +89,38 @@
         <li>
             The rover's trajectory can only take the following values 'M', 'L', 'R'.
         </li>
+        <li>
+            The rovers' trajectories are executed sequentially, which means that the second rover won't start to move until the first one has finished
+            moving.
+        </li>
     </ul>
 
-
-
-
+    <h4>Some future considerations</h4>
+    <ul class="list-unstyled mt-3">
+        <li class="m-2 mb-3">
+            @*  <span class="font-weight-bold">Storing the transactions into a persistent database</span>*@
+            <h6>Storing the transactions into a persistent database</h6>
+            The current solution is not only stateless, the information tied to the request is not stored into a
+            persistent database and will therefore be discarded when the view is rendered. Most real life applications
+            require saving the objects for future access, reporting, etc...
+        </li>
+        <li class="m-2 mb-3">
+            <h6>Error handling and logging</h6>
+            Logging is important for troubleshooting, particularly when running the application in production.
+        <li class="m-2 mb-3">
+            <h6>A Simulation </h6>
+            Visualizing the robots' movements on the plateau would be a great addition to the project.
+        </li>
+        <li class="m-2 mb-3">
+            <h6>
+                Scalability
+            </h6>
+            The sequential execution of the rovers trajectories will resolve small requests (small number of rovers and
+            limited length trajectory strings), but it is not optimal for large requests, or if the application needs to
+            support a high volume of requests. In these scenarios, I would favor a multithreaded/distributed solution.
+            The proper handling of collisions and shared resources is also critical in these types of solutions.
+            I would also recommend creating a well designed API service with a separate interface instead of an MVC web application.
+        </li>
+    </ul>
     <a asp-area="" asp-controller="RoverTracking" asp-action="FinalPlateauState">Try out the application!</a>
 </div>
