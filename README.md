@@ -27,7 +27,7 @@ test run
 
 ### About the tests
 
-The RoverTracking.Tests includes a simple test that runs against three inputs, to verify that their results produced match the expected outputs.
+The RoverTracking.Tests includes a simple test that runs against three different inputs, to verify that the results produced match the expected outputs.
 
 
 
