@@ -27,9 +27,13 @@ test run
 
 ### About the tests
 
-The RoverTracking.Tests includes a simple test that runs against three different inputs, to verify that the results produced match the expected outputs.
-
-
+The RoverTracking.Tests includes:
+#### Repository test 
+Runs against three different valid inputs, to verify that the results produced (final positions of the rovers) match the expected outputs.
+#### Custom validation attribute test 
+Runs against three different invalid inputs, and makes sure the validation fails.
+#### Controller test 
+Mocks a RoverTrackingController object with an error, and makes sure the ViewData value that is passed to the view is "ModelError", instead of "Success" when the model is valid.
 
 ## Built With
 
