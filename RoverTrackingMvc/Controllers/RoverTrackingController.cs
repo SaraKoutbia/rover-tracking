@@ -2,6 +2,7 @@
 using System;
 using RoverTrackingMvc.Models;
 using RoverTrackingMvc.Repositories;
+using System.Diagnostics;
 
 
 namespace RoverTrackingMvc.Controllers
@@ -22,24 +23,28 @@ namespace RoverTrackingMvc.Controllers
 
         public ActionResult FinalPlateauState(Input userInput)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
                     var plateau = _plateauRepository.ComputeFinalState(userInput);
                     ViewBag.Plateau = plateau;
                     ViewData["Status"] = "Success";
                 }
-                catch (Exception ex)
+                else
                 {
-                    ModelState.AddModelError("Server side error occurred", ex.Message.ToString());
+                    ViewData["Status"] = "ModelError";
                 }
+
+                return View(userInput);
             }
-            else
+
+            catch (Exception ex)
             {
-                ViewData["Status"] = "ModelError";
+                ModelState.AddModelError("Server side error occurred", ex.Message.ToString());
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
-            return View(userInput);
         }
     }
 }
